@@ -5,6 +5,8 @@ function getDrink () {
 
     let inputDrink = document.querySelector('input').value.toLowerCase()
 
+
+//allows url generation and for it to be dynamic and less breakable
     let url = new URL('/api/json/v1/1/search.php', 'https://www.thecocktaildb.com') 
     
     url.searchParams.append('s', inputDrink)
@@ -16,13 +18,18 @@ function getDrink () {
         .then(res => res.json())
 
         .then(data => {
-            console.log(data.drinks[0])
-            document.querySelector('h2').innerText = data.drinks[0].strDrink;
-            document.querySelector('img').src = data.drinks[0].strDrinkThumb;
-            document.querySelector('.instructionText').innerText = data.drinks[0].strInstructions;
+
+            //picks a random drink from the list
+            const randomDrink = data.drinks[Math.floor(Math.random()* data.drinks.length)]
+            console.log(randomDrink)
+
+            document.querySelector('h2').innerText = randomDrink.strDrink;
+            document.querySelector('img').src = randomDrink.strDrinkThumb;
+            document.querySelector('.instructionText').innerText = randomDrink.strInstructions;
         
-            if (inputDrink === 'pina colada'){
-                let pinaColadaAudio = document.querySelector('audio');
+            //🍍🥥🎶
+            if (randomDrink.strDrink === 'Pina Colada'){
+                let pinaColadaAudio = document.querySelector('.pinaColadaAudio');
                 pinaColadaAudio.play()
                 // pinaColadaAudio.volume = 0;
                 // pinaColadaAudio.play();
@@ -31,7 +38,16 @@ function getDrink () {
                     pinaColadaAudio.setAttribute('controls', true)
                     // pinaColadaAudio.classList.add('show')
                 }, 5000)
-            }
+            } 
+        //     else if (inputDrink.includes('gin')) {
+
+        //         let pinaColadaAudio = document.querySelector('audio');
+        //         pinaColadaAudio.play()
+
+        //         setTimeout(() => {
+        //             pinaColadaAudio.setAttribute('controls', true)
+        //         }, 5000)
+        //     }
         })
 
         .catch(err => {
