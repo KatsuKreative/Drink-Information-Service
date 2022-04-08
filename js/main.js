@@ -5,7 +5,13 @@ function getDrink () {
 
     let inputDrink = document.querySelector('input').value.toLowerCase()
 
-    fetch (`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${inputDrink}`)
+    let url = new URL('/api/json/v1/1/search.php', 'https://www.thecocktaildb.com') 
+    
+    url.searchParams.append('s', inputDrink)
+
+    console.log(url.toString())
+
+    fetch (url.toString())
         
         .then(res => res.json())
 
@@ -32,3 +38,5 @@ function getDrink () {
             console.log(`error ${err}`)
         });
     }
+
+    
