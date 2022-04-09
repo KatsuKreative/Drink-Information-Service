@@ -27,27 +27,34 @@ function getDrink () {
             document.querySelector('img').src = randomDrink.strDrinkThumb;
             document.querySelector('.instructionText').innerText = randomDrink.strInstructions;
         
+            const audioFile = document.querySelector('audio')
             //🍍🥥🎶
             if (randomDrink.strDrink === 'Pina Colada'){
-                let pinaColadaAudio = document.querySelector('.pinaColadaAudio');
-                pinaColadaAudio.play()
-                // pinaColadaAudio.volume = 0;
-                // pinaColadaAudio.play();
+            
+                audioFile.src = 'assets/Pina_Colada.mp3'
+                
+                audioFile.play()
 
                 setTimeout(() => {
-                    pinaColadaAudio.setAttribute('controls', true)
-                    // pinaColadaAudio.classList.add('show')
+                    audioFile.setAttribute('controls', true)
                 }, 5000)
-            } 
-        //     else if (inputDrink.includes('gin')) {
+            }
+            else if (randomDrink.strDrink === 'Gin Swizzle') {
 
-        //         let pinaColadaAudio = document.querySelector('audio');
-        //         pinaColadaAudio.play()
+                audioFile.src = 'assets/Gin_And_Juice.mp3'
+                
+                audioFile.play()
 
-        //         setTimeout(() => {
-        //             pinaColadaAudio.setAttribute('controls', true)
-        //         }, 5000)
-        //     }
+                setTimeout(() => {
+                    audioFile.setAttribute('controls', true)
+                }, 5000)
+            }
+            else {
+                audioFile.pause()
+                audioFile.controls = false
+            }
+
+
         })
 
         .catch(err => {
