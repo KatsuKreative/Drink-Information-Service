@@ -18,7 +18,6 @@ function getDrink () {
         .then(res => res.json())
 
         .then(data => {
-
             //picks a random drink from the list
             const randomDrink = data.drinks[Math.floor(Math.random()* data.drinks.length)]
             console.log(randomDrink)
@@ -42,6 +41,8 @@ function getDrink () {
             else if (randomDrink.strDrink === 'Gin Swizzle') {
 
                 audioFile.src = 'assets/Gin_And_Juice.mp3'
+
+                audioFile.currentTime=42;
                 
                 audioFile.play()
 
